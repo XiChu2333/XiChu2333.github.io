@@ -1,107 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xi Chu — Wireless Communications, Computational Electromagnetics & AI Agent Systems</title>
-<meta name="description" content="Xi Chu is a doctoral researcher at Trine University and software engineer at UiPath, working on AI agent-driven calibration of ray tracing and computational electromagnetics for low-altitude UAV communications.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xi Chu — Software Engineer</title>
+<meta name="description" content="Xi Chu — backend engineer building AI agent observability and data infrastructure. Trace ingestion at 40M+ requests/day, hot/warm storage layers, ETL pipelines.">
 <style>
-  :root {
-    --ink: #1a1a2e; --muted: #5c6370; --accent: #14507a; --line: #e3e6ea; --bg: #fdfdfc;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Georgia, 'Times New Roman', serif; color: var(--ink); background: var(--bg); line-height: 1.65; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
-  header h1 { font-size: 2.1rem; letter-spacing: .02em; }
-  header .title { color: var(--muted); margin-top: 6px; font-size: 1.02rem; }
-  header .affil { margin-top: 2px; color: var(--muted); font-size: .95rem; font-style: italic; }
-  .links { margin-top: 14px; font-size: .92rem; }
-  .links a { color: var(--accent); text-decoration: none; margin-right: 14px; }
-  .links a:hover { text-decoration: underline; }
-  h2 { font-size: 1.15rem; margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); letter-spacing: .04em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
-  p { margin-bottom: 10px; }
-  .pub { margin-bottom: 16px; padding-left: 2.2em; text-indent: -2.2em; }
-  .pub .tag { display: inline-block; text-indent: 0; font-family: Arial, sans-serif; font-size: .72rem; font-weight: 700; color: #fff; background: var(--accent); border-radius: 3px; padding: 1px 7px; margin-right: 6px; vertical-align: 1px; }
-  .pub .tag.gray { background: #8a94a0; }
-  .pub em { color: var(--ink); }
-  .pub .cites { color: var(--muted); font-size: .9rem; }
-  .pub a { color: var(--accent); text-decoration: none; }
-  .pub a:hover { text-decoration: underline; }
-  .me { font-weight: 700; }
-  ul.plain { list-style: none; }
-  ul.plain li { margin-bottom: 8px; padding-left: 1.1em; position: relative; }
-  ul.plain li::before { content: "—"; position: absolute; left: 0; color: var(--muted); }
-  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+:root{
+  --bg:#fafaf9; --card:#ffffff; --ink:#1c1917; --muted:#57534e; --line:#e7e5e4;
+  --accent:#0f766e; --accent-soft:#ccfbf1; --chip:#f5f5f4;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0c0a09; --card:#1c1917; --ink:#f5f5f4; --muted:#a8a29e; --line:#292524;
+         --accent:#2dd4bf; --accent-soft:#134e4a; --chip:#292524; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+nav{display:flex;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+nav .brand{font-weight:700;letter-spacing:.02em;margin-right:auto}
+nav a{color:var(--muted);text-decoration:none;font-size:15px}
+nav a:hover,nav a.active{color:var(--accent)}
+header.hero{padding:56px 0 32px}
+.hero-top{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+.hero-text{flex:1;min-width:280px}
+.avatar{width:148px;height:148px;border-radius:50%;object-fit:cover;
+  border:3px solid var(--card);box-shadow:0 0 0 1px var(--line),0 8px 24px rgba(0,0,0,.10)}
+h1{font-size:34px;margin:0 0 6px;letter-spacing:-.02em}
+.tagline{font-size:19px;color:var(--accent);font-weight:600;margin:0 0 14px}
+.lede{font-size:17px;color:var(--muted);max-width:46em;margin:0 0 20px}
+.links{display:flex;flex-wrap:wrap;gap:12px;font-size:15px}
+.links a{color:var(--accent);text-decoration:none;border:1px solid var(--line);
+  padding:6px 14px;border-radius:999px;background:var(--card)}
+.links a:hover{border-color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:34px 0 8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-size:22px;letter-spacing:-.01em}
+.stat span{font-size:13px;color:var(--muted)}
+section{padding:34px 0 6px}
+h2{font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
+h2:after{content:"";display:block;width:44px;height:3px;background:var(--accent);border-radius:2px;margin-top:8px}
+.job{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-top:18px}
+.job .head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.job h3{font-size:17px;margin:0}
+.job .co{color:var(--accent);font-weight:600}
+.job .when{margin-left:auto;color:var(--muted);font-size:14px;white-space:nowrap}
+.job p.intro{color:var(--muted);font-size:15px;margin:8px 0 10px}
+.job ul{margin:8px 0 2px;padding-left:20px}
+.job li{margin:7px 0;font-size:15.5px}
+.job li b{font-weight:600}
+.skills{display:grid;gap:14px;margin-top:18px}
+.skillrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.skillrow b{display:block;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--chip);border-radius:8px;padding:4px 10px;font-size:14px}
+.edu{display:grid;gap:10px;margin-top:16px}
+.edu .row{display:flex;flex-wrap:wrap;gap:4px 12px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;padding:12px 18px;font-size:15px}
+.edu .row .when{margin-left:auto;color:var(--muted);font-size:14px}
+footer{margin-top:48px;padding:26px 0 40px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:12px}
+footer a{color:var(--accent);text-decoration:none}
+@media (max-width:560px){ h1{font-size:28px} .job .when{margin-left:0;width:100%} }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <h1>Xi Chu</h1>
-  <div class="title">Doctoral Researcher, Trine University &nbsp;·&nbsp; Software Engineer — AI Agent Engineering, UiPath, Inc.</div>
-  <div class="affil">Bellevue, Washington, USA</div>
+<nav>
+  <span class="brand">XI CHU</span>
+  <a href="index.html" class="active">Home</a>
+  <a href="research.html">Research</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-top">
+    <div class="hero-text">
+      <h1>Xi Chu</h1>
+      <p class="tagline">Software Engineer · AI Agent Observability &amp; Data Infrastructure</p>
+      <p class="lede">I build the tracing platform behind UiPath’s AI agents — trace ingestion at
+      40M+ requests/day, a low-latency hot storage layer for live agent runs, a Snowflake warm layer
+      for permanent storage and analytics, and the ETL pipelines and APIs that connect them.
+      Owned end-to-end: design → deployment → on-call.</p>
+    </div>
+    <img class="avatar" src="profile.jpg" alt="Xi Chu">
+  </div>
   <div class="links">
+    <a href="mailto:chuxi.fine@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/xichu/">LinkedIn</a>
+    <a href="https://github.com/XiChu2333">GitHub</a>
     <a href="https://scholar.google.com/citations?user=sztcQyoAAAAJ">Google Scholar</a>
-    <a href="mailto:xchu26@my.trine.edu">Email</a>
-    <!-- 按需补充: <a href="#">LinkedIn</a> <a href="#">ResearchGate</a> <a href="#">GitHub</a> -->
+  </div>
+  <div class="stats">
+    <div class="stat"><b>40M+</b><span>trace requests / day in production</span></div>
+    <div class="stat"><b>tens of ms</b><span>hot-layer read &amp; write latency</span></div>
+    <div class="stat"><b>$100K+/yr</b><span>saved replacing a vendor pipeline</span></div>
+    <div class="stat"><b>200+</b><span>citations · 8 publications · 1 patent</span></div>
   </div>
 </header>
 
-<h2>About</h2>
-<p>I work at the intersection of wireless propagation and AI agent systems: making physics-based simulations of the radio environment trustworthy enough to stand in for expensive measurement campaigns. My doctoral research develops AI agent-driven calibration of differentiable ray tracing and self-healing computational electromagnetics (CEM) simulations, supporting low-altitude UAV air-to-ground (A2G) communications. At UiPath (NYSE: PATH), I am a core engineer of the observability platform for Agent Builder, operating agent execution-trace telemetry at up to 40 million requests per day.</p>
-<p>My earlier measurement work on low-altitude UAV A2G channels — conducted with Universidad Politécnica de Madrid and Tongji University — has accumulated 200+ citations and continues to be used by UAV wireless research groups in the U.S. and worldwide.</p>
+<section id="experience">
+  <h2>Experience</h2>
 
-<h2>Research Interests</h2>
-<ul class="plain">
-  <li>Air-to-ground wireless channel measurement and modeling for low-altitude UAV systems</li>
-  <li>AI agent and LLM-driven methods for wireless and electromagnetic engineering</li>
-  <li>Differentiable ray tracing and computational electromagnetics</li>
-  <li>Reliability and observability of production AI agent systems</li>
-</ul>
+  <div class="job">
+    <div class="head">
+      <h3>Software Engineer</h3><span class="co">UiPath — Agent Observability</span>
+      <span class="when">Bellevue, WA · 2023 – present (intern 2022)</span>
+    </div>
+    <p class="intro">The tracing platform for UiPath’s AI agents. A trace records every step of an
+    agent’s execution — tool calls, memory injections, LLM conversations — as spans with payloads
+    up to 2MB; the platform ingests and persists 40M+ trace requests per day.</p>
+    <ul>
+      <li><b>Trace ingestion &amp; hot layer:</b> producer → Azure Event Hub → consumers → Table
+      Storage. The queue decouples the API from storage, absorbs spikes with back-pressure, and
+      recovers from checkpoints with no data loss. Partition key <b>OrgId_TenantId_TraceId</b>
+      gives tenant isolation, no write hotspots, and O(1) traceId lookups at tens-of-ms latency;
+      optimistic concurrency via ETag; 7-day retention to control cost.</li>
+      <li><b>Warm layer (my primary ownership):</b> batch ETL moves traces into Snowflake for
+      permanent retention; multi-layer dbt models turn raw traces into curated metrics — agent
+      consumption/credits, memory calls, loop latency, error rates — behind APIs, dashboards, and
+      user-defined alerts. Cost vs. freshness tuned per table: Dynamic Tables with low TARGET_LAG
+      only where real-time alerting needs it.</li>
+      <li><b>Real-time trace UX:</b> SignalR/WebSocket notification service on CosmosDB Change
+      Feed pushes new spans to clients as agents run — replaced per-second polling, cutting
+      backend load 60%+ with sub-second updates.</li>
+      <li><b>SQL → Snowflake ETL:</b> Azure Data Factory + Change Tracking CDC with 100%
+      row-level completeness, soft-delete tombstones, automatic schema evolution, and daily
+      snapshots for point-in-time restore — replaced Fivetran for FedRAMP compliance,
+      saving $100K+/yr.</li>
+      <li><b>Correctness as an invariant:</b> root-caused a 0.3% silent row-loss bug
+      (Change Tracking version drift mid-query) and built a reconciliation monitor anchored to
+      fixed CT-version boundaries that proves hot-to-warm completeness every cycle.</li>
+      <li><b>Ecosystem &amp; quality:</b> OpenTelemetry exporter to Microsoft Agent&nbsp;365;
+      schema-validation platform cutting schema errors 91%; usage/lineage monitor that
+      decommissioned 70TB+ of unused data; Python SQL linter in PR review; daily AI-assisted
+      development (Claude Code, Cursor, Codex).</li>
+    </ul>
+  </div>
 
-<h2>Selected Publications</h2>
+  <div class="job">
+    <div class="head">
+      <h3>Software Engineer</h3><span class="co">Corigine — FPGA Prototyping Platforms</span>
+      <span class="when">Shanghai · 2019 – 2021</span>
+    </div>
+    <ul>
+      <li>Built a Python automation framework orchestrating device-level Tcl/Bash to fully
+      automate FPGA regression testing, then evolved it into a Flask web service for
+      self-serve design validation.</li>
+      <li>Led C++/Qt development of an FPGA probe-repositioning tool; co-inventor on China
+      Patent CN202110751582.7 (probe-reuse method in FPGA prototyping).</li>
+    </ul>
+  </div>
 
-<div class="pub"><span class="tag">Journal</span><span class="me">X. Chu</span>, Y. Hou, C. Briso-Rodríguez, “AI-Enabled, Identifiability-Aware Calibration of Differentiable Ray Tracing for Low-Altitude UAV Air-to-Ground Channels,” <em>IEEE Open Journal of Antennas and Propagation</em>, 2026 (early access). <a href="https://ieeexplore.ieee.org/document/11643789">[IEEE Xplore]</a></div>
+  <div class="job">
+    <div class="head">
+      <h3>Algorithm Engineer</h3><span class="co">ZTE — Wireless Communications</span>
+      <span class="when">Shanghai · 2018 – 2019</span>
+    </div>
+    <ul>
+      <li>Led a 4-engineer team building a Python diagnostic platform for NB-IoT base-station
+      and device logs — structured parsing, statistical metrics, and cross-source correlation
+      for root-cause analysis of connection failures.</li>
+      <li>Simulated MAC-layer wireless channels and built ML-based adaptive scheduling
+      (Python/scikit-learn, MATLAB) — improved spectrum utilization 20%.</li>
+    </ul>
+  </div>
+</section>
 
-<div class="pub"><span class="tag">Conf.</span><span class="me">X. Chu</span>, Y. Hou, “A Lightweight Agentic Framework for Self-Healing Computational Electromagnetics Simulations,” <em>International Conference on Computational Electromagnetics (ICCEM)</em>, 2026 (accepted). Journal extension under review at <em>IEEE JMMCT</em>.</div>
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skillrow"><b>Languages</b>
+      <div class="chips"><span class="chip">C# / .NET</span><span class="chip">Python</span>
+      <span class="chip">SQL</span><span class="chip">TypeScript / JavaScript</span>
+      <span class="chip">C / C++</span></div></div>
+    <div class="skillrow"><b>Platform</b>
+      <div class="chips"><span class="chip">Azure Event Hub</span><span class="chip">Table Storage</span>
+      <span class="chip">CosmosDB (Change Feed)</span><span class="chip">Azure Data Factory</span>
+      <span class="chip">Snowflake</span><span class="chip">dbt</span><span class="chip">Dynamic Tables</span>
+      <span class="chip">SQL Change Tracking / CDC</span></div></div>
+    <div class="skillrow"><b>Distributed Systems</b>
+      <div class="chips"><span class="chip">Producer–queue–consumer</span>
+      <span class="chip">Partition-key design</span><span class="chip">Optimistic concurrency</span>
+      <span class="chip">Back-pressure &amp; checkpointed recovery</span>
+      <span class="chip">Hot/warm two-tier storage</span><span class="chip">Multi-tenant isolation</span>
+      <span class="chip">REST / gRPC / WebSocket</span></div></div>
+    <div class="skillrow"><b>Reliability &amp; Observability</b>
+      <div class="chips"><span class="chip">Monitoring / alerting / SLOs</span>
+      <span class="chip">Reconciliation &amp; completeness checks</span>
+      <span class="chip">OpenTelemetry</span><span class="chip">On-call &amp; production RCA</span></div></div>
+    <div class="skillrow"><b>DevOps &amp; AI</b>
+      <div class="chips"><span class="chip">Kubernetes</span><span class="chip">Docker</span>
+      <span class="chip">Terraform</span><span class="chip">GitHub Actions / Azure DevOps</span>
+      <span class="chip">Claude Code · Cursor · Codex (daily)</span>
+      <span class="chip">RLHF / online-evaluation collaboration</span></div></div>
+  </div>
+</section>
 
-<div class="pub"><span class="tag">Journal</span>Z. Qiu, <span class="me">X. Chu</span>, C. Calvo-Ramirez, C. Briso, X. Yin, “Low Altitude UAV Air-to-Ground Channel Measurement and Modeling in Semiurban Environments,” <em>Wireless Communications and Mobile Computing</em>, 2017. <span class="cites">96 citations</span> <a href="https://doi.org/10.1155/2017/1587412">[DOI]</a></div>
-
-<div class="pub"><span class="tag">Conf.</span><span class="me">X. Chu</span>, C. Briso, D. He, X. Yin, J. Dou, “Channel Modeling for Low-Altitude UAV in Suburban Environments Based on Ray Tracer,” <em>12th European Conference on Antennas and Propagation (EuCAP)</em>, 2018. <span class="cites">29 citations</span></div>
-
-<div class="pub"><span class="tag">Conf.</span>X. Yin, <span class="me">X. Chu</span>, J. Chen, Z. Zhong, “Performance Evaluation of a Hybrid-Beamforming Sounder for 26 GHz Channel Measurements,” <em>IEEE VTC-Fall</em>, 2017.</div>
-
-<div class="pub"><span class="tag">Conf.</span>S. Gao, J. Zhang, J. Song, H. Yang, <span class="me">X. Chu</span>, “Random Channel Generator of the Integrated Power Line Communication and Visible Light Communication,” <em>IEEE ISPLC</em>, 2017. <span class="cites">10 citations</span></div>
-
-<div class="pub"><span class="tag">Journal</span>Y. Liu, D. Dong, L. Wang, <span class="me">X. Chu</span>, P. Wang, M. Jin, “Strain Rate Dependent Deformation and Failure Behavior of Laser Welded DP780 Steel Joint under Dynamic Tensile Loading,” <em>Materials Science and Engineering: A</em>, 2015. <span class="cites">66 citations</span></div>
-
-<div class="pub"><span class="tag gray">Preprint</span><span class="me">X. Chu</span>, Y. Hou, “Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems,” arXiv:2606.17443, 2026 (under review).</div>
-
-<h2>Professional Service</h2>
-<ul class="plain">
-  <li>Invited reviewer, <em>IEEE Antennas and Wireless Propagation Letters</em> (five manuscripts, 2018–2019)</li>
-  <li>Invited reviewer, <em>IEEE Access</em> (2026)</li>
-  <li>Member, IEEE and IEEE Communications Society</li>
-</ul>
-
-<h2>Experience</h2>
-<ul class="plain">
-  <li><strong>UiPath, Inc.</strong>, Bellevue, WA — Software Engineer, AI Agent Engineering (2023–present)</li>
-  <li><strong>Corigine</strong>, Shanghai — Software Engineer, FPGA prototyping platforms (2019–2021)</li>
-  <li><strong>ZTE Corporation</strong>, Shanghai — Algorithm Engineer, Wireless Communications (2018–2019)</li>
-</ul>
-
-<h2>Education</h2>
-<ul class="plain">
-  <li>Doctor of Information Technology (in progress), Trine University, 2026–</li>
-  <li>M.S. Computer Science, Texas A&amp;M University, 2022</li>
-  <li>M.Eng. Electronics Science and Technology, Tongji University, 2018</li>
-  <li>B.S. Applied Physics, Northeastern University, 2015</li>
-</ul>
+<section id="education">
+  <h2>Education</h2>
+  <div class="edu">
+    <div class="row"><b>M.S. Computer Science</b> — Texas A&amp;M University <span>· GPA 3.9/4.0</span>
+      <span class="when">2021 – 2022</span></div>
+    <div class="row"><b>M.Eng. Electronics Science &amp; Technology</b> — Tongji University
+      <span class="when">2015 – 2018</span></div>
+    <div class="row"><b>B.S. Applied Physics</b> — Northeastern University
+      <span class="when">2011 – 2015</span></div>
+  </div>
+</section>
 
 <footer>
-  Last updated August 2026 · Citation counts from Google Scholar
+  <span>© 2026 Xi Chu</span>
+  <a href="research.html">Research &amp; Publications →</a>
 </footer>
 
 </div>
