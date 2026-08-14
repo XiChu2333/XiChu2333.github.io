@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Xi Chu — Software Engineer</title>
-<meta name="description" content="Xi Chu — backend engineer building AI agent observability and data infrastructure. Trace ingestion at 40M+ requests/day, hot/warm storage layers, ETL pipelines.">
+<meta name="description" content="Xi Chu — backend engineer building AI agent observability and data infrastructure: high-volume trace ingestion, hot/warm storage layers, ETL pipelines.">
 <style>
 :root{
   --bg:#fafaf9; --card:#ffffff; --ink:#1c1917; --muted:#57534e; --line:#e7e5e4;
@@ -79,8 +79,8 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="hero-text">
       <h1>Xi Chu</h1>
       <p class="tagline">Software Engineer · AI Agent Observability &amp; Data Infrastructure</p>
-      <p class="lede">I build the tracing platform behind UiPath’s AI agents — trace ingestion at
-      40M+ requests/day, a low-latency hot storage layer for live agent runs, a Snowflake warm layer
+      <p class="lede">I build the tracing platform behind UiPath’s AI agents — high-volume trace
+      ingestion, a low-latency hot storage layer for live agent runs, a Snowflake warm layer
       for permanent storage and analytics, and the ETL pipelines and APIs that connect them.
       Owned end-to-end: design → deployment → on-call.</p>
     </div>
@@ -93,9 +93,9 @@ footer a{color:var(--accent);text-decoration:none}
     <a href="https://scholar.google.com/citations?user=sztcQyoAAAAJ">Google Scholar</a>
   </div>
   <div class="stats">
-    <div class="stat"><b>40M+</b><span>trace requests / day in production</span></div>
+    <div class="stat"><b>10s of millions</b><span>trace requests / day in production</span></div>
     <div class="stat"><b>tens of ms</b><span>hot-layer read &amp; write latency</span></div>
-    <div class="stat"><b>$100K+/yr</b><span>saved replacing a vendor pipeline</span></div>
+    <div class="stat"><b>sub-second</b><span>live trace updates via push</span></div>
     <div class="stat"><b>200+</b><span>citations · 8 publications · 1 patent</span></div>
   </div>
 </header>
@@ -109,32 +109,32 @@ footer a{color:var(--accent);text-decoration:none}
       <span class="when">Bellevue, WA · 2023 – present (intern 2022)</span>
     </div>
     <p class="intro">The tracing platform for UiPath’s AI agents. A trace records every step of an
-    agent’s execution — tool calls, memory injections, LLM conversations — as spans with payloads
-    up to 2MB; the platform ingests and persists 40M+ trace requests per day.</p>
+    agent’s execution — tool calls, memory injections, LLM conversations — as spans; the platform
+    ingests and persists tens of millions of trace requests per day.</p>
     <ul>
       <li><b>Trace ingestion &amp; hot layer:</b> producer → Azure Event Hub → consumers → Table
       Storage. The queue decouples the API from storage, absorbs spikes with back-pressure, and
-      recovers from checkpoints with no data loss. Partition key <b>OrgId_TenantId_TraceId</b>
-      gives tenant isolation, no write hotspots, and O(1) traceId lookups at tens-of-ms latency;
-      optimistic concurrency via ETag; 7-day retention to control cost.</li>
+      recovers from checkpoints with no data loss. A <b>tenant-scoped partition-key design</b>
+      gives tenant isolation, no write hotspots, and O(1) trace lookups at tens-of-ms latency;
+      optimistic concurrency via ETag; bounded hot retention to control cost.</li>
       <li><b>Warm layer (my primary ownership):</b> batch ETL moves traces into Snowflake for
       permanent retention; multi-layer dbt models turn raw traces into curated metrics — agent
       consumption/credits, memory calls, loop latency, error rates — behind APIs, dashboards, and
       user-defined alerts. Cost vs. freshness tuned per table: Dynamic Tables with low TARGET_LAG
       only where real-time alerting needs it.</li>
       <li><b>Real-time trace UX:</b> SignalR/WebSocket notification service on CosmosDB Change
-      Feed pushes new spans to clients as agents run — replaced per-second polling, cutting
-      backend load 60%+ with sub-second updates.</li>
+      Feed pushes new spans to clients as agents run — replaced per-second polling, sharply
+      cutting backend load with sub-second updates.</li>
       <li><b>SQL → Snowflake ETL:</b> Azure Data Factory + Change Tracking CDC with 100%
       row-level completeness, soft-delete tombstones, automatic schema evolution, and daily
-      snapshots for point-in-time restore — replaced Fivetran for FedRAMP compliance,
-      saving $100K+/yr.</li>
-      <li><b>Correctness as an invariant:</b> root-caused a 0.3% silent row-loss bug
-      (Change Tracking version drift mid-query) and built a reconciliation monitor anchored to
-      fixed CT-version boundaries that proves hot-to-warm completeness every cycle.</li>
+      snapshots for point-in-time restore — replaced a commercial ETL vendor with an in-house
+      pipeline to meet compliance requirements.</li>
+      <li><b>Correctness as an invariant:</b> root-caused a subtle CDC edge case and built a
+      reconciliation monitor anchored to fixed version boundaries that proves hot-to-warm
+      completeness every cycle.</li>
       <li><b>Ecosystem &amp; quality:</b> OpenTelemetry exporter to Microsoft Agent&nbsp;365;
-      schema-validation platform cutting schema errors 91%; usage/lineage monitor that
-      decommissioned 70TB+ of unused data; Python SQL linter in PR review; daily AI-assisted
+      schema-validation platform enforcing data contracts across teams; usage/lineage monitoring
+      that retired large volumes of unused data; Python SQL linter in PR review; daily AI-assisted
       development (Claude Code, Cursor, Codex).</li>
     </ul>
   </div>
